@@ -1,0 +1,42 @@
+@import "tailwindcss";
+
+@theme{
+    --font-font1: 'Poppins';
+}
+
+body{
+    @apply bg-slate-950 m-5 md:m-10 font-font1
+}
+body::-webkit-scrollbar{
+    display: none;
+}
+input, textarea{
+    @apply bg-blue-50/20 w-full p-3 text-center md:text-left text-white outline-2 outline-sky-400 rounded-2xl mt-4 sm:text-xl     
+}
+
+#logBtn{
+    @apply bg-sky-400 text-center text-slate-900 font-bold mt-[3rem] hover:bg-sky-300 outline-0 ease-in-out
+}
+button{
+    @apply p-3 rounded-2xl cursor-pointer
+}
+.taskBox{
+    @apply w-[200px] md:w-1/2 rounded-2xl p-4
+}
+.taskList{
+    @apply w-[300px] md:w-full flex-shrink-0 md:shrink rounded-2xl h-full
+}
+#tasklist::-webkit-scrollbar {  
+    display: none;
+}
+
+h3{
+    @apply mt-3 font-bold
+}
+.allTaskList{
+    @apply mt-5 rounded-2xl p-3 flex justify-around shrink-0 w-[300px] h-40
+}
+.pending h1, .completed h1, .failed h1 , .notAccepted h1{
+    @apply text-3xl font-bold p-3 rounded-xl
+}
+
