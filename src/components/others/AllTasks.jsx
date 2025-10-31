@@ -41,7 +41,7 @@ const AllTasks = ({ fltr }) => {
       )}
 
       {(fltr === "completed" || fltr === "all") && (
-        <div className="completed mt-20">
+        <div className="completed mt-10">
           <h1 className="text-3xl font-bold bg-green-500/50 p-3 rounded my-3">
             Completed
           </h1>
@@ -74,7 +74,7 @@ const AllTasks = ({ fltr }) => {
       )}
 
       {(fltr === "failed" || fltr === "all") && (
-        <div className="failed mt-20">
+        <div className="failed mt-10">
           <h1 className="text-3xl font-bold mb-4 bg-red-500/50 p-3 rounded">
             Failed Tasks
           </h1>
@@ -112,7 +112,7 @@ const AllTasks = ({ fltr }) => {
       )}
 
       {(fltr === "notaccept" || fltr === "all") && (
-        <div className="notAccepted mt-20 p-3">
+        <div className="notAccepted mt-10 p-3">
           <h1 className="text-3xl font-bold bg-blue-500/30 mb-5">
             Not Accepted
           </h1>

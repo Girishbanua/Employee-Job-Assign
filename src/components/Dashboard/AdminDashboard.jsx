@@ -4,7 +4,7 @@ import CreateTask from "../others/CreateTask";
 import Header from "../others/Header";
 import Search from "../others/Search";
 
-const AdminDashboard = ({data}) => {
+const AdminDashboard = ({data, handleUser}) => {
   const [fltr, setFltr] = useState('')
   const [show, setShow] = useState('')
   
@@ -14,7 +14,7 @@ const AdminDashboard = ({data}) => {
 
   return (
     <div className="text-white w-full p-5">
-      <Header data={data} />
+      <Header handleUser={handleUser} data={data} />
       <CreateTask />
       <Search handleFltr={handleFltr} />
       { fltr != '' && <AllTasks fltr={fltr} />}

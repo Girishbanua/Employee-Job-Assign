@@ -1,8 +1,8 @@
-const Header = ({ data }) => {  
+const Header = ({ data, handleUser }) => {  
   let empName = data.name.split(' ')[0]  
   const logOutUser = () =>{
     localStorage.setItem('loggedInUser', '')
-    window.location.reload()
+    handleUser('')
   }
   return (
     <div className="text-2xl flex items-center justify-between mb-6 ">

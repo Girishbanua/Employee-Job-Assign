@@ -11,6 +11,10 @@ const App = () => {
   console.log(authData);
   console.log(loggedInUserData);
 
+  const handleUser = (usr) => {
+    setUser(usr)
+  }
+
   const handleLogin = useCallback(
     (email, pass) => {
       if (email === "admin@example.com" && pass === "123") {
@@ -46,7 +50,7 @@ const App = () => {
     [authData]
   );
 
-    useEffect(() => {
+  useEffect(() => {
     if (authData) {
       const storedUser = localStorage.getItem("loggedInUser");
       if (storedUser) {
@@ -61,8 +65,8 @@ const App = () => {
   return (
     <div className="app">
       {!user ? <Login handleLogin={handleLogin} /> : ""}
-      {user == "admin" ? <AdminDashboard data={loggedInUserData} /> : ""}
-      {user == "employee" ? <EmployeeDashboard data={loggedInUserData} /> : ""}
+      {user == "admin" ? <AdminDashboard handleUser={handleUser} data={loggedInUserData} /> : ""}
+      {user == "employee" ? <EmployeeDashboard handleUser={handleUser} data={loggedInUserData} /> : ""}
     </div>
   );
 };
