@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { AuthContext } from "../../context/AuthProvider";
 
 const CreateTask = () => {
   const [title, setTitle] = useState("");
@@ -7,34 +8,60 @@ const CreateTask = () => {
   const [category, setCategory] = useState("");
   const [description, setDescription] = useState("");
 
-  const [newTask, setNewTask] = useState({});
-
   const handleSubmit = (e) => {
     e.preventDefault();
-    setNewTask({
-      title,
-      taskDate,      
-      category,
-      taskDescription:description,
-      active: false,
-      newTask: true,
-      failed: false,
-      completed: false,
-    });
-    
-    const data = JSON.parse(localStorage.getItem('employees'))
-    data.forEach( (elm) => {
-      if (empName === elm.name){
-        elm.tasks.push(newTask)
-        console.log(data)
-      }
-    })
 
+    const data = JSON.parse(localStorage.getItem("employees")) || [];
+
+    // Find the employee
+    const smalletter = empName.toLowerCase();
+    const upperletter = empName.toUpperCase();
+    const firstname = empName.split(" ")[0].toLowerCase();
+
+    let taskAssigned = false;
+
+    const updatedData = data.map((elm) => {
+      if (
+        smalletter === elm.name.toLowerCase() ||
+        upperletter === elm.name.toUpperCase() ||
+        empName === elm.name ||
+        firstname === elm.name.split(" ")[0].toLowerCase()
+      ) {
+        const taskNumber = elm.tasks.length + 1;
+
+        const newTask = {
+          id: Date.now(), // unique id
+          taskNumber,
+          active: false,
+          newTask: true,
+          completed: false,
+          failed: false,
+          title,
+          taskDate,
+          category,
+          taskDescription: description,
+        };
+
+        elm.tasks.push(newTask);
+        elm.taskCount.newTask += 1;
+        taskAssigned = true;
+      }
+      return elm;
+    });
+
+    if (taskAssigned) {
+      localStorage.setItem("employees", JSON.stringify(updatedData));
+      alert("✅ Task created successfully!");
+    } else {
+      alert("⚠️ Employee not found!");
+    }
+
+    // Reset form fields
     setTitle("");
     setTaskDate("");
     setEmpName("");
     setCategory("");
-    setDescription("");  
+    setDescription("");
   };
 
   return (
@@ -44,7 +71,7 @@ const CreateTask = () => {
         className="flex flex-wrap md:flex-nowrap gap-10 md:gap-20 justify-evenly"
       >
         <div className="w-full">
-          <h3>new Title</h3>
+          <h3>New Title</h3>
           <input
             type="text"
             placeholder="Enter the task"
@@ -54,8 +81,6 @@ const CreateTask = () => {
           <h3>Date</h3>
           <input
             type="date"
-            name=""
-            id=""
             onChange={(e) => setTaskDate(e.target.value)}
             value={taskDate}
           />
@@ -74,6 +99,7 @@ const CreateTask = () => {
             value={category}
           />
         </div>
+
         <div className="w-full flex flex-col">
           <h3>Description</h3>
           <textarea
@@ -81,10 +107,16 @@ const CreateTask = () => {
             onChange={(e) => setDescription(e.target.value)}
             value={description}
           ></textarea>
-          <button className="bg-green-400/50 w-full mt-4">Create Task</button>
+          <button
+            type="submit"
+            className="bg-green-400/50 w-full mt-4 rounded-lg py-2 hover:bg-green-400/70"
+          >
+            Create Task
+          </button>
         </div>
       </form>
     </div>
   );
 };
+
 export default CreateTask;

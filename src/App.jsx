@@ -8,8 +8,8 @@ const App = () => {
   const [user, setUser] = useState(null);
   const [loggedInUserData, setLoggedInUserData] = useState(null);  
   const authData = useContext(AuthContext);
-  console.log(authData);
-  console.log(loggedInUserData);
+  // console.log(authData);
+  // console.log(loggedInUserData);
 
   const handleUser = (usr) => {
     setUser(usr)
